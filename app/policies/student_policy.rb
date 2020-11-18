@@ -4,4 +4,10 @@ class StudentPolicy < ApplicationPolicy
       scope.all
     end
   end
+  def create?
+    return true
+  end
+  def update?
+    student.user == user
+  end
 end
