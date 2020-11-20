@@ -1,6 +1,5 @@
 class Api::V1::StudentsController < ApplicationController
   before_action :set_student, only: [:show, :update]
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
 
   def index
     students = policy_scope(Student)

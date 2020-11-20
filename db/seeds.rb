@@ -5,9 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Student.delete_all
+Tutor.delete_all
 
-
-5.times do
+10.times do
   user = User.new(
     email: Faker::Internet.email,
     password: '123456',
@@ -23,7 +24,7 @@
   )
 end
 
-5.times do
+10.times do
   tutor = User.create(
     email: Faker::Internet.email,
     password: '123456',
@@ -39,3 +40,11 @@ end
   )
 
 end
+
+admin = User.new(
+  email: 'jamieson.reinhard2@gmail.com',
+  password: '123456',
+  role: 'admin'
+)
+
+admin.save
