@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  has_one :student, dependent: :destroy
+  has_one :tutor, dependent: :destroy
 
   enum role: [:student, :tutor, :admin]
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
