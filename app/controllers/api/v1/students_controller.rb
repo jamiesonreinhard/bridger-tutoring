@@ -29,6 +29,8 @@ class Api::V1::StudentsController < ApplicationController
     end
   end
 
+  
+
   private
 
   def set_student
