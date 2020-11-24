@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_165524) do
+ActiveRecord::Schema.define(version: 2020_11_24_145510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "partners", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "students", force: :cascade do |t|
     t.string "first_name"
@@ -21,6 +28,10 @@ ActiveRecord::Schema.define(version: 2020_11_20_165524) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "school"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
 
@@ -30,6 +41,12 @@ ActiveRecord::Schema.define(version: 2020_11_20_165524) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "occupation"
+    t.string "phone_number"
+    t.string "linked_in_link"
     t.index ["user_id"], name: "index_tutors_on_user_id"
   end
 
