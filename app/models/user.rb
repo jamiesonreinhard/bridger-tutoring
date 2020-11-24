@@ -11,6 +11,7 @@ class User < ApplicationRecord
   /x
 
   validates :password, format: PASSWORD_REQUIREMENTS
+  
 
   after_initialize do
     if self.new_record?
