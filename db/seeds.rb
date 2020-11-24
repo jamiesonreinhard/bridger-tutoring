@@ -1,4 +1,4 @@
-
+Partner.delete_all
 Student.delete_all
 Tutor.delete_all
 User.delete_all

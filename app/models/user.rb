@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_one_attached :avatar
   has_one :student, dependent: :destroy
   has_one :tutor, dependent: :destroy
 
