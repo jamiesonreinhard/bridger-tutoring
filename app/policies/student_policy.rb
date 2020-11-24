@@ -14,6 +14,6 @@ class StudentPolicy < ApplicationPolicy
   end
   
   def update?
-    student.user == user
+    student.user == logged_in_user
   end
 end
