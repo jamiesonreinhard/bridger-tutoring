@@ -1,4 +1,4 @@
-
+Partner.delete_all
 Student.delete_all
 Tutor.delete_all
 User.delete_all
@@ -31,7 +31,13 @@ end
   Tutor.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
-    user: tutor
+    user: tutor,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: 'USA',
+    occupation: Faker::Job.title,
+    phone_number: Faker::PhoneNumber.cell_phone,
+    linked_in_link: 'linkedin.com/in/myname'
   )
 
 end

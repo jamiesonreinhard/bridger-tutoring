@@ -1,5 +1,6 @@
 class Api::V1::TutorsController < ApplicationController
   before_action :set_tutor, only: [:show, :update]
+  skip_before_action :authorized
 
   def index
     tutors = policy_scope(Tutor)
