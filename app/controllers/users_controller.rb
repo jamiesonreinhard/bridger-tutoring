@@ -29,6 +29,11 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  # LOGGING OUT
+  def logout
+    
+  end
+
   private
 
   def user_params
