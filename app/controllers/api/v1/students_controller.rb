@@ -1,5 +1,6 @@
 class Api::V1::StudentsController < ApplicationController
   before_action :set_student, only: [:show, :update]
+  skip_before_action :authorized
 
   def index
     students = policy_scope(Student)
@@ -21,7 +22,7 @@ class Api::V1::StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.user = current_user
-    authorize @student
+    # authorize @student
     if @student.save
       render :show, status: :created
     else
@@ -43,6 +44,6 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :city, :state, :country, :school)
+    params.require(:student).permit(:first_name, :last_name, :city, :state, :country, :school, :id)
   end
 end
