@@ -37,7 +37,8 @@ end
     country: 'USA',
     occupation: Faker::Job.title,
     phone_number: Faker::PhoneNumber.cell_phone,
-    linked_in_link: 'linkedin.com/in/myname'
+    linked_in_link: 'linkedin.com/in/myname',
+    summary: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false)
   )
 
 end

@@ -1,5 +1,6 @@
 class Api::V1::TutorsController < ApplicationController
   before_action :set_tutor, only: [:show, :update]
+  skip_before_action :authorized
 
   def index
     tutors = policy_scope(Tutor)
@@ -41,6 +42,6 @@ class Api::V1::TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link)
+    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :summary)
   end
 end
