@@ -4,7 +4,7 @@ class Api::V1::TutorsController < ApplicationController
 
   def index
     tutors = policy_scope(Tutor)
-    render json: tutors
+    render json: tutors.as_json(include: :appointments)
   end
 
   def show
@@ -42,6 +42,6 @@ class Api::V1::TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :summary)
+    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :user_id, :summary)
   end
 end

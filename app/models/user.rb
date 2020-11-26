@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   enum role: [:student, :tutor, :admin]
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }
+  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   PASSWORD_REQUIREMENTS = /\A
     (?=.{8,}) #contains at least 8 char
     (?=.*\d) #contains at least 1 number

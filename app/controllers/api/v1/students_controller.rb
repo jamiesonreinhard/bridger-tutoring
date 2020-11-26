@@ -22,7 +22,7 @@ class Api::V1::StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     @student.user = current_user
-    # authorize @student
+    authorize @student
     if @student.save
       render :show, status: :created
     else
@@ -43,7 +43,7 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :city, :state, :country, :school, :id)
+    params.require(:student).permit(:first_name, :last_name, :city, :state, :country, :school, :user_id)
   end
 
 end
