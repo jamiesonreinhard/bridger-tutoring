@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_140212) do
+ActiveRecord::Schema.define(version: 2020_11_26_172651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 2020_11_26_140212) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "date"
+    t.bigint "tutor_id", null: false
+    t.integer "student_id"
+    t.boolean "confirmed", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_appointments_on_student_id"
+    t.index ["tutor_id"], name: "index_appointments_on_tutor_id"
   end
 
   create_table "partners", force: :cascade do |t|
@@ -81,6 +92,8 @@ ActiveRecord::Schema.define(version: 2020_11_26_140212) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "appointments", "students"
+  add_foreign_key "appointments", "tutors"
   add_foreign_key "students", "users"
   add_foreign_key "tutors", "users"
 end
