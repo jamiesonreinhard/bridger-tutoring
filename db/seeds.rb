@@ -72,7 +72,8 @@ end
 40.times do
   Appointment.create(
     date: rand_date,
-    tutor: Tutor.all[rand(0..9)]
+    tutor: Tutor.all[rand(0..9)],
+    student: Student.all[rand(0..9)]
   )
 end
 

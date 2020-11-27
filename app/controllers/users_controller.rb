@@ -18,7 +18,21 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+      if @user.role == "student"
+        render json: {
+          user: @user.as_json(include: { 
+            student: {
+          include: :appointments
+          }
+        }), token: token}
+      else
+        render json: {
+          user: @user.as_json(include: { 
+            tutor: {
+          include: :appointments
+          }
+        }), token: token}
+      end
     else
       render json: {error: "Invalid email or password!"}
     end

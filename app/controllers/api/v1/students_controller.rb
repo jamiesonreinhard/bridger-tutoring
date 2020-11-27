@@ -4,7 +4,7 @@ class Api::V1::StudentsController < ApplicationController
 
   def index
     students = policy_scope(Student)
-    render json: students
+    render json: students.as_json(include: :appointments)
   end
 
   def show
@@ -20,11 +20,15 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.new(student_params)
-    @student.user = current_user
+    p student_params
+    @student = Student.create(student_params)
     authorize @student
-    if @student.save
-      render :show, status: :created
+    if @student.valid?
+      render json: {user: @student.user.as_json(include: {
+        student: {
+          include: :appointments
+        }
+      })}
     else
       render_error
     end

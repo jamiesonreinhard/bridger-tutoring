@@ -20,11 +20,14 @@ class Api::V1::TutorsController < ApplicationController
   end
 
   def create
-    @tutor = Tutor.new(tutor_params)
-    @tutor.user = current_user
+    @tutor = Tutor.create(tutor_params)
     authorize @tutor
-    if @tutor.save
-      render :show, status: :created
+    if @tutor.valid
+      render json: {user: @tutor.user.as_json(include: {
+        tutor: {
+          include: :appointments
+        }
+      })}
     else
       render_error
     end
