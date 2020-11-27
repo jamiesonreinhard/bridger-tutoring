@@ -1,4 +1,4 @@
-class Api::V1::StudentsController < ApplicationController
+class Api::V1::AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :update]
 
   def index
@@ -7,7 +7,7 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def show
-    render json: @appointment
+    render json: @appointment(include: :student)
   end
 
   def update
@@ -20,7 +20,6 @@ class Api::V1::StudentsController < ApplicationController
 
   def create
     @appointment = Appointment.new(student_params)
-    @appointment.user = current_user
     authorize @appointment
     if @appointment.save
       render :show, status: :created
