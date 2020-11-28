@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :students, only: [ :index, :show, :update, :create ]
       resources :tutors, only: [ :index, :show, :update, :create ]
       resources :partners, only: [ :index ]
-      resources :appointments, only: [ :index, :show, :update, :create ]
+      resources :appointments, only: [ :index, :show, :update, :create, :destroy ]
     end
   end
 end

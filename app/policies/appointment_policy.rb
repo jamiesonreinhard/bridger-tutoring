@@ -17,4 +17,7 @@ class AppointmentPolicy < ApplicationPolicy
     appointment.user == logged_in_user
   end
 
+  def destroy?
+    appointment.user == current_user
+  end
 end
