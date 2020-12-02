@@ -1,6 +1,7 @@
 class Api::V1::AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :update, :destroy]
-  # skip_before_action 
+  skip_before_action :authorized
+  
   def index
     appointments = policy_scope(Appointment)
     render json: appointments
@@ -31,9 +32,7 @@ class Api::V1::AppointmentsController < ApplicationController
 
   def destroy
     authorize @appointment
-
     @appointment.destroy
-
   end
 
   private

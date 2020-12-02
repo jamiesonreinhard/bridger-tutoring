@@ -14,10 +14,10 @@ class AppointmentPolicy < ApplicationPolicy
   end
   
   def update?
-    appointment.user == logged_in_user
+    true
   end
 
   def destroy?
-    appointment.user == current_user
+    true
   end
 end
