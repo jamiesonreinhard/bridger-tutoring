@@ -26,7 +26,7 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'rack-cors'
 gem 'jwt'
 gem 'dotenv-rails', groups: [:development, :test]
-gem "aws-sdk-s3", require: false
+gem 'cloudinary', '~> 1.16.0'
 
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible

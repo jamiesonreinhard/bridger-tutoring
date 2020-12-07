@@ -5,4 +5,10 @@ class Api::V1::PartnersController < ApplicationController
     partners = policy_scope(Partner)
     render json: partners
   end
+
+  private
+
+  def partner_perameters
+    params.require(:partner).permit(:name, :description, :photo)
+  end
 end
