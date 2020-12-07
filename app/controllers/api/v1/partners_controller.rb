@@ -9,6 +9,6 @@ class Api::V1::PartnersController < ApplicationController
   private
 
   def partner_perameters
-    params.require(:partner).permit(:name, :description, :photo)
+    params.require(:partner).permit(:name, :description, :image)
   end
 end

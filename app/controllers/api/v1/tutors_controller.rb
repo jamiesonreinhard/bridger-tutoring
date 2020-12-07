@@ -22,7 +22,7 @@ class Api::V1::TutorsController < ApplicationController
   def create
     @tutor = Tutor.create(tutor_params)
     authorize @tutor
-    if @tutor.valid
+    if @tutor.save
       render json: {user: @tutor.user.as_json(include: {
         tutor: {
           include: :appointments
