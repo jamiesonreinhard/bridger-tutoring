@@ -21,7 +21,7 @@ class Api::V1::AppointmentsController < ApplicationController
   end
 
   def create
-    @appointment = Appointment.new(student_params)
+    @appointment = Appointment.new(appointment_params)
     authorize @appointment
     if @appointment.save
       render :show, status: :created
@@ -47,7 +47,7 @@ class Api::V1::AppointmentsController < ApplicationController
   end
 
   def appointment_params
-    params.require(:appointment).permit(:name, :date, :tutor_id, :student_id)
+    params.require(:appointment).permit(:name, :date, :time, :tutor_id, :student_id)
   end
 
 end

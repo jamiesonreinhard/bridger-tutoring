@@ -5,9 +5,15 @@ Tutor.delete_all
 User.delete_all
 
 def rand_date
-  # return a random date within 100 days of today in both past and future directions.
-  n = rand(1..50)
+  n = rand(1..10)
   Date.today.advance(days: n)
+end
+
+def rand_time
+  now = Time.now
+  a_day_ago = now - (60 * 60 * 24)
+  random_time = rand(a_day_ago..now)
+  return random_time
 end
 
 10.times do
@@ -80,6 +86,7 @@ end
 20.times do
   Appointment.create(
     date: rand_date,
+    time: rand_time(9, 19),
     tutor: Tutor.all[rand(0..9)]
   )
 end
