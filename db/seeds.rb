@@ -86,7 +86,7 @@ end
 20.times do
   Appointment.create(
     date: rand_date,
-    time: rand_time(9, 19),
+    time: rand_time,
     tutor: Tutor.all[rand(0..9)]
   )
 end
