@@ -23,7 +23,7 @@ class Api::V1::StudentsController < ApplicationController
     p student_params
     @student = Student.create(student_params)
     authorize @student
-    if @student.valid?
+    if @student.save
       render json: {user: @student.user.as_json(include: {
         student: {
           include: :appointments
