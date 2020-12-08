@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include Rails.application.routes.url_helpers
   before_action :authorized, only: [:auto_login]
   
 
@@ -8,8 +9,9 @@ class UsersController < ApplicationController
     p @user
     p "LOOK HERE ^^^"
     if @user.valid?
+      avatar = rails_blob_path(@user.avatar)
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token, avatar: @user.avatar}
+      render json: {user: @user, token: token, avatar: avatar)}
     else
       render json: {error: "Invalid email or password!"}
     end
