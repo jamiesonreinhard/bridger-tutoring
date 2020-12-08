@@ -6,12 +6,10 @@ class UsersController < ApplicationController
   # REGISTER
   def create
     @user = User.create(user_params)
-    p @user
-    p "LOOK HERE ^^^"
     if @user.valid?
       avatar = rails_blob_path(@user.avatar)
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token, avatar: avatar)}
+      render json: {user: @user, token: token, avatar: avatar}
     else
       render json: {error: "Invalid email or password!"}
     end
