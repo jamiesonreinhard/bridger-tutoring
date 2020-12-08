@@ -5,10 +5,13 @@ class UsersController < ApplicationController
   # REGISTER
   def create
     @user = User.create(user_params)
+    p @user
+    p "LOOOOOOK HEEEEEEERE"
     if @user.valid?
       token = encode_token({user_id: @user.id})
-      render json: {user: @user, token: token}
+      render json: {user: @user, token: token, avatar: @user.avatar}
     else
+      p @user
       render json: {error: "Invalid email or password!"}
     end
   end
