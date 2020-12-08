@@ -6,12 +6,11 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     p @user
-    p "LOOOOOOK HEEEEEEERE"
+    p "LOOK HERE ^^^"
     if @user.valid?
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token, avatar: @user.avatar}
     else
-      p @user
       render json: {error: "Invalid email or password!"}
     end
   end
@@ -55,7 +54,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password_digest, :role, :avatar)
+    params.permit(:email, :password, :role, :avatar)
   end
 
 end
