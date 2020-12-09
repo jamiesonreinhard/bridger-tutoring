@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include Rails.application.routes.url_helpers
   before_action :authorized, only: [:auto_login]
   
 
@@ -7,7 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.valid?
-      avatar = rails_blob_path(@user.avatar)
+      
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token, avatar: avatar}
     else
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:email, :password, :role, :avatar)
+    params.permit(:email, :password, :role)
   end
 
 end

@@ -23,11 +23,12 @@ class Api::V1::TutorsController < ApplicationController
     @tutor = Tutor.create(tutor_params)
     authorize @tutor
     if @tutor.save
+      avatar = rails_blob_path(@tutor.avatar)
       render json: {user: @tutor.user.as_json(include: {
         tutor: {
           include: :appointments
         }
-      })}
+      }, avatar: avatar)}
     else
       render_error
     end
@@ -45,6 +46,6 @@ class Api::V1::TutorsController < ApplicationController
   end
 
   def tutor_params
-    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :user_id, :summary)
+    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :user_id, :summary, :avatar)
   end
 end
