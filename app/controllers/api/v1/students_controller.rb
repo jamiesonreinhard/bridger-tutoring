@@ -22,14 +22,14 @@ class Api::V1::StudentsController < ApplicationController
   def create
     p student_params
     @student = Student.create(student_params)
-    authorize @student
+    # authorize @student
     if @student.save
       avatar = rails_blob_path(@student.avatar)
       render json: {user: @student.user.as_json(include: {
         student: {
           include: :appointments
         }
-      }, avatar: avatar)}
+      }), avatar: avatar}
     else
       render_error
     end
@@ -48,7 +48,7 @@ class Api::V1::StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:first_name, :last_name, :city, :state, :country, :school, :user_id, :avatar)
+    params.require(:student).permit(:avatar, :first_name, :last_name, :city, :state, :country, :school, :user_id)
   end
 
 end
