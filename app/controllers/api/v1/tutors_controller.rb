@@ -28,7 +28,7 @@ class Api::V1::TutorsController < ApplicationController
         tutor: {
           include: :appointments
         }
-      }, avatar: avatar)}
+      }), avatar: avatar}
     else
       render_error
     end
