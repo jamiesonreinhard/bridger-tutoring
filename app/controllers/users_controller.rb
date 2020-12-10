@@ -21,19 +21,21 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
       if @user.role == "student"
+        avatar = rails_blob_path(@user.student.avatar)
         render json: {
           user: @user.as_json(include: { 
             student: {
           include: :appointments
           }
-        }), token: token}
-      else
+        }), token: token, avatar: avatar}
+      elsif @user.role == "tutor"
+        avatar = rails_blob_path(@user.tutor.avatar)
         render json: {
           user: @user.as_json(include: { 
             tutor: {
           include: :appointments
           }
-        }), token: token}
+        }), token: token, avatar: avatar}
       end
     else
       render json: {error: "Invalid email or password!"}
