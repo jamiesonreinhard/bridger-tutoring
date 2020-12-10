@@ -4,7 +4,7 @@ class Api::V1::TutorsController < ApplicationController
 
   def index
     tutors = policy_scope(Tutor)
-    render json: tutors.as_json(include: :appointments)
+    render json: tutors.map { |tutor| tutor_json(tutor) }
   end
 
   def show
@@ -21,14 +21,14 @@ class Api::V1::TutorsController < ApplicationController
 
   def create
     @tutor = Tutor.create(tutor_params)
-    # authorize @tutor
+    authorize @tutor
     if @tutor.save
       avatar = rails_blob_path(@tutor.avatar)
       render json: {user: @tutor.user.as_json(include: {
         tutor: {
           include: :appointments
         }
-      }), avatar: avatar}
+      }, avatar: avatar)}
     else
       render_error
     end
@@ -40,12 +40,17 @@ class Api::V1::TutorsController < ApplicationController
     @tutor = Tutor.find(params[:id])
   end
 
+  def tutor_json(tutor)
+    avatar = rails_blob_path(tutor.avatar)
+    tutor.as_json(include: :appointments).merge(avatar: avatar)
+  end
+
   def render_error
     render json: { errors: @tutor.errors.full_messages },
       status: :unprocessable_entity
   end
 
   def tutor_params
-    params.require(:tutor).permit(:avatar, :first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :summary, :user_id)
+    params.require(:tutor).permit(:first_name, :last_name, :city, :state, :country, :occupation, :phone_number, :linked_in_link, :user_id, :summary, :avatar)
   end
 end
