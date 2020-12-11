@@ -36,6 +36,8 @@ class UsersController < ApplicationController
           include: :appointments
           }
         }), token: token, avatar: avatar}
+        elsif @user.role == "admin"
+        render json: { user: @user, token: token }
       end
     else
       render json: {error: "Invalid email or password!"}
