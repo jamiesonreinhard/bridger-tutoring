@@ -24,7 +24,7 @@ class Api::V1::AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     authorize @appointment
     if @appointment.save
-      render :show, status: :created
+      render json: @appointment
     else
       render_error
     end
