@@ -21,15 +21,17 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       token = encode_token({user_id: @user.id})
       if @user.role == "student"
-        avatar = rails_blob_path(@user.student.avatar)
+        @user.student.avatar ? avatar = rails_blob_path(@user.student.avatar) : avatar = nil
+        
         render json: {
           user: @user.as_json(include: { 
             student: {
           include: :appointments
           }
         }), token: token, avatar: avatar}
-        else
-        avatar = rails_blob_path(@user.tutor.avatar)
+      else
+        @user.tutor.avatar ? avatar = rails_blob_path(@user.tutor.avatar) : avatar = nil
+        
         render json: {
           user: @user.as_json(include: { 
             tutor: {
