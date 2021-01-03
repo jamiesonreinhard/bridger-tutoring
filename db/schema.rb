@@ -42,8 +42,7 @@ ActiveRecord::Schema.define(version: 2021_01_03_234815) do
     t.boolean "confirmed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.date "date"
-    t.time "time"
+    t.datetime "date"
     t.index ["student_id"], name: "index_appointments_on_student_id"
     t.index ["tutor_id"], name: "index_appointments_on_tutor_id"
   end
