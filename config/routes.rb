@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :tutors, only: [ :index, :show, :update, :create ]
       resources :partners, only: [ :index, :create ]
       resources :appointments, only: [ :index, :show, :update, :create, :destroy ]
+      resources :subjects, only: [:index, :create, :destroy]
       resources :users, only: [ :show ]
     end
   end
